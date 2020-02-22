@@ -53,7 +53,9 @@
  To access streetAddress, just say address.streetAddress
  To access number in type home:
     phoneNumbers.fika.[1].[1].[2].number
- To modify just see example below. 
+ To modify just see example below.
+ 
+ ``` 
  
  
   
