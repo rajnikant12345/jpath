@@ -3,18 +3,21 @@ package jpath
 import "fmt"
 
 const (
+	// ConfigError error in configuration
 	ConfigError = 1
 )
 
-type JpathError struct {
+type TheError struct {
 	Code    int
 	Message string
 }
 
-func PathError(code int, message string) *JpathError {
-	return &JpathError{code, message}
+// TheError create an error object with code and message
+func PathError(code int, message string) *TheError {
+	return &TheError{code, message}
 }
 
-func (e *JpathError) Error() string {
+// Error implement error interface
+func (e *TheError) Error() string {
 	return fmt.Sprintf("Error Code: %d || Error message: %s", e.Code, e.Message)
 }
