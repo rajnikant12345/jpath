@@ -5,6 +5,7 @@ import (
 	"github.com/rajnikant12345/jpath.git/vcopy"
 )
 
+// JsonPath structure representing a JsonPath
 type JsonPath struct {
 	Path map[string]interface{}
 }

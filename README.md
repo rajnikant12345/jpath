@@ -13,6 +13,51 @@
  GO111MODULE=on go get github.com/rajnikant12345/jpath
  GO111MODULE=on go mod tidy
 ```
+
+## Syntax support
+ ```
+ [1] for array index 1, we use 1 based index, not 0 based
+ [*] for all array index
+ . for object access
+ and that's it...
+ e.g.
+ {
+ 	"firstName": "John",
+ 	"lastName": "doe",
+ 	"age": 26,
+ 	"address": {
+ 		"streetAddress": "naist street",
+ 		"city": "Nara",
+ 		"postalCode": "630-0192"
+ 	},
+ 	"phoneNumbers": {
+ 		"fika": [
+ 			[
+ 				[{
+ 						"type": "iPhone",
+ 						"number": "0123-4567-8888"
+ 					},
+ 					{
+ 						"type": "home",
+ 						"number": "0123-4567-8910"
+ 					}
+ 				]
+ 			]
+ 		]
+ 	}
+ 
+ }
+ 
+ 
+ To access firstname, just say firstName
+ To access streetAddress, just say address.streetAddress
+ To access number in type home:
+    phoneNumbers.fika.[1].[1].[2].number
+ To modify just see example below. 
+ 
+ 
+  
+
 ## How to use
 
 ```Go
