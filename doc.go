@@ -1,6 +1,5 @@
 // Package jpath is created to support getting json path value and provide support for modifying value at a perticular JSON path.
-
-
+//
 // [1] for array index 1, we use 1 based index, not 0 based
 // [*] for all array index
 // . for object access
