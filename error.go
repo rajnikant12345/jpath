@@ -3,8 +3,7 @@ package jpath
 import "fmt"
 
 const (
-	ConfigError       = 1
-	ParserError       = 2
+	ConfigError = 1
 )
 
 type JpathError struct {

@@ -23,7 +23,7 @@ import (
 	jww "github.com/spf13/jwalterweatherman"
 )
 
-func toLower ( in string ) string {
+func toLower(in string) string {
 	return in
 }
 

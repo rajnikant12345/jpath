@@ -3,7 +3,6 @@ package jpath
 import (
 	"encoding/json"
 	"github.com/rajnikant12345/jpath.git/vcopy"
-
 )
 
 type JsonPath struct {
@@ -12,26 +11,25 @@ type JsonPath struct {
 
 /*
 CompileNewJsonPath this function takes, multiple path strings and returns a JsonPath object.
- */
-func CompileNewJsonPath( paths []string ) ( *JsonPath ,error ) {
+*/
+func CompileNewJsonPath(paths []string) (*JsonPath, error) {
 	path := ""
-	for _,v := range paths {
-		path += `"`+ v +`":"",`
+	for _, v := range paths {
+		path += `"` + v + `":"",`
 	}
-	path = "{"+path[:len(path)-1]+"}"
-
+	path = "{" + path[:len(path)-1] + "}"
 
 	m := map[string]interface{}{}
 
-	err := json.Unmarshal([]byte(path) , &m )
+	err := json.Unmarshal([]byte(path), &m)
 
 	if err != nil {
 		return nil, err
 	}
 
-	j := JsonPath{ map[string]interface{}{} }
+	j := JsonPath{map[string]interface{}{}}
 
-	err = viper.MergeConfigMap( m )
+	err = viper.MergeConfigMap(m)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +42,6 @@ func CompileNewJsonPath( paths []string ) ( *JsonPath ,error ) {
 	return &j, nil
 
 }
-
 
 func (e *JsonPath) getJsonAtPath(data interface{}, tokens map[string]interface{}) (out interface{}, err error) {
 
@@ -138,21 +135,21 @@ func (e *JsonPath) getJsonAtPath(data interface{}, tokens map[string]interface{}
 /*
 GetJsonAtPathValue returns a value in path , path is specified
 while creating a JsonPath object.
- */
-func ( e *JsonPath ) GetJsonAtPathValue( js interface{} ) ( interface{}, error ) {
-	return e.getJsonAtPath( js, e.Path )
+*/
+func (e *JsonPath) GetJsonAtPathValue(js interface{}) (interface{}, error) {
+	return e.getJsonAtPath(js, e.Path)
 }
 
 /*
 MapJsonAtPathValue calls function f on each value which occur in path , path is specified
 while creating a JsonPath object. You can return a value in f anf this function will set value in
 that path.
- */
-func ( e *JsonPath ) MapJsonAtPathValue( js interface{} , f func( interface{} ) interface{} ) ( interface{}, error ) {
-	return e.mapJsonAtPath( js, e.Path, f )
+*/
+func (e *JsonPath) MapJsonAtPathValue(js interface{}, f func(interface{}) interface{}) (interface{}, error) {
+	return e.mapJsonAtPath(js, e.Path, f)
 }
 
-func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}, mapfunc func( interface{} ) interface{} ) (out interface{}, err error) {
+func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}, mapfunc func(interface{}) interface{}) (out interface{}, err error) {
 	for k, v := range tokens {
 		if ismap(data) {
 			in := data.(map[string]interface{})
@@ -178,11 +175,11 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 							for index := 1; index <= len(sl); index++ {
 								if isfloat(sl[index-1]) {
 									if mapfunc != nil {
-										sl[index-1] = mapfunc( sl[index-1] )
+										sl[index-1] = mapfunc(sl[index-1])
 									}
 								} else if isstring(sl[index-1]) {
 									if mapfunc != nil {
-										sl[index-1] = mapfunc( sl[index-1] )
+										sl[index-1] = mapfunc(sl[index-1])
 									}
 								} else if ismap(sl[index-1]) {
 									tok, ok := v.(map[string]interface{})
@@ -190,7 +187,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 										return nil, PathError(ConfigError, "Invalid configuration key "+k)
 									}
 									if mapfunc != nil {
-										sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc )
+										sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc)
 										if err != nil {
 											return
 										}
@@ -201,7 +198,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 										return nil, PathError(ConfigError, "Invalid configuration key "+k)
 									}
 									if mapfunc != nil {
-										sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc )
+										sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc)
 										if err != nil {
 											return
 										}
@@ -214,11 +211,11 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 							}
 							if isfloat(sl[index-1]) {
 								if mapfunc != nil {
-									sl[index-1] = mapfunc( sl[index-1] )
+									sl[index-1] = mapfunc(sl[index-1])
 								}
 							} else if isstring(sl[index-1]) {
 								if mapfunc != nil {
-									sl[index-1] = mapfunc( sl[index-1] )
+									sl[index-1] = mapfunc(sl[index-1])
 								}
 							} else if ismap(sl[index-1]) {
 								tok, ok := v.(map[string]interface{})
@@ -226,7 +223,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 									return nil, PathError(ConfigError, "Invalid configuration key "+k)
 								}
 								if mapfunc != nil {
-									sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok , mapfunc )
+									sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc)
 									if err != nil {
 										return
 									}
@@ -237,7 +234,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 									return nil, PathError(ConfigError, "Invalid configuration key "+k)
 								}
 								if mapfunc != nil {
-									sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok , mapfunc )
+									sl[index-1], err = e.mapJsonAtPath(sl[index-1], tok, mapfunc)
 									if err != nil {
 										return
 									}
@@ -253,7 +250,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 					return nil, PathError(ConfigError, "Invalid configuration key "+k)
 				}
 				if mapfunc != nil {
-					in[k], err = e.mapJsonAtPath(val, tok , mapfunc )
+					in[k], err = e.mapJsonAtPath(val, tok, mapfunc)
 					if err != nil {
 						return
 					}
@@ -280,7 +277,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 						return nil, PathError(ConfigError, "Invalid configuration key "+k)
 					}
 					if mapfunc != nil {
-						in[index], err = e.mapJsonAtPath(in[index], tok, mapfunc )
+						in[index], err = e.mapJsonAtPath(in[index], tok, mapfunc)
 						if err != nil {
 							return nil, err
 						}
@@ -295,7 +292,7 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 					return nil, PathError(ConfigError, "Invalid configuration key "+k)
 				}
 				if mapfunc != nil {
-					in[index-1], err = e.mapJsonAtPath(in[index-1], tok, mapfunc )
+					in[index-1], err = e.mapJsonAtPath(in[index-1], tok, mapfunc)
 					if err != nil {
 						return nil, err
 					}
