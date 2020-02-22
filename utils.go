@@ -5,9 +5,6 @@ import (
 	"strconv"
 )
 
-func IsValidAddress(addr string) bool {
-	return true
-}
 
 func isfloat(in interface{}) bool {
 	return reflect.TypeOf(in).Kind() == reflect.Float64
