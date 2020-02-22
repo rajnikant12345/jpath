@@ -5,7 +5,6 @@ import (
 	"strconv"
 )
 
-
 func isfloat(in interface{}) bool {
 	return reflect.TypeOf(in).Kind() == reflect.Float64
 }
@@ -25,15 +24,14 @@ func ismap(in interface{}) bool {
 func isJsonPathSlice(in string) int {
 	if len(in) >= 3 && in[0] == '[' && in[len(in)-1] == ']' {
 		val := in[1 : len(in)-1]
-		if val == "*" {
-			return 0
-		} else {
+		if val != "*" {
 			val, err := strconv.ParseInt(val, 10, 64)
 			if err != nil {
 				return -1
 			}
 			return int(val)
 		}
+		return 0
 	}
 	return -1
 }
