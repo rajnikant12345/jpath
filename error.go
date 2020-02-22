@@ -7,12 +7,13 @@ const (
 	ConfigError = 1
 )
 
+// TheError struct to represent error
 type TheError struct {
 	Code    int
 	Message string
 }
 
-// TheError create an error object with code and message
+// PathError create an error object with code and message
 func PathError(code int, message string) *TheError {
 	return &TheError{code, message}
 }
