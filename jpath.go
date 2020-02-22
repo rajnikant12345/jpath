@@ -10,6 +10,9 @@ type JsonPath struct {
 	Path map[string]interface{}
 }
 
+/*
+CompileNewJsonPath this function takes, multiple path strings and returns a JsonPath object.
+ */
 func CompileNewJsonPath( paths []string ) ( *JsonPath ,error ) {
 	path := ""
 	for _,v := range paths {
@@ -41,6 +44,7 @@ func CompileNewJsonPath( paths []string ) ( *JsonPath ,error ) {
 	return &j, nil
 
 }
+
 
 func (e *JsonPath) getJsonAtPath(data interface{}, tokens map[string]interface{}) (out interface{}, err error) {
 
@@ -131,10 +135,19 @@ func (e *JsonPath) getJsonAtPath(data interface{}, tokens map[string]interface{}
 	return nil, nil
 }
 
+/*
+GetJsonAtPathValue returns a value in path , path is specified
+while creating a JsonPath object.
+ */
 func ( e *JsonPath ) GetJsonAtPathValue( js interface{} ) ( interface{}, error ) {
 	return e.getJsonAtPath( js, e.Path )
 }
 
+/*
+MapJsonAtPathValue calls function f on each value which occur in path , path is specified
+while creating a JsonPath object. You can return a value in f anf this function will set value in
+that path.
+ */
 func ( e *JsonPath ) MapJsonAtPathValue( js interface{} , f func( interface{} ) interface{} ) ( interface{}, error ) {
 	return e.mapJsonAtPath( js, e.Path, f )
 }

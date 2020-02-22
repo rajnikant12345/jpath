@@ -12,6 +12,5 @@
  GO111MODULE=on go get github.com/rajnikant12345/jpath
  GO111MODULE=on go mod tidy
 ```
-
- 
+## How to use
 
