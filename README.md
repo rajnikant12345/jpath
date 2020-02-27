@@ -1,4 +1,5 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/rajnikant12345/jpath)](https://goreportcard.com/report/github.com/rajnikant12345/jpath)
+[![GoDoc](https://godoc.org/github.com/rajnikant12345/jpath?status.svg)](https://godoc.org/github.com/rajnikant12345/jpath)
 # jpath 
 ## A small utility library to play with JSON path.
 
