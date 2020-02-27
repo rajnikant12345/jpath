@@ -171,7 +171,8 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 					index := isJsonPathSlice(k)
 
 					if index == -1 {
-						return nil, PathError(ConfigError, "Invalid index in configuration")
+						break
+						//return nil, PathError(ConfigError, "Invalid index in configuration")
 					} else {
 						sl := val.([]interface{})
 						if index == 0 {
@@ -270,7 +271,8 @@ func (e *JsonPath) mapJsonAtPath(data interface{}, tokens map[string]interface{}
 		} else if isslice(data) {
 			index := isJsonPathSlice(k)
 			if index == -1 {
-				return nil, PathError(ConfigError, "Invalid index in configuration")
+				continue
+				//return nil, PathError(ConfigError, "Invalid index in configuration")
 			}
 			in := data.([]interface{})
 			if index == 0 {
