@@ -2,40 +2,26 @@ package jpath
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 )
 
 func TestGetJsonAtPath(t *testing.T) {
-	j, _ := CompileNewJsonPath([]string{"phoneNumbers.fika.[1].[1].[*].number"})
+	j, _ := CompileNewJsonPath([]string{"[*].car.color"})
 
-	in := `{
-	"firstName": "John",
-	"lastName": "doe",
-	"age": 26,
-	"address": {
-		"streetAddress": "naist street",
-		"city": "Nara",
-		"postalCode": "630-0192"
-	},
-	"phoneNumbers": {
-		"fika": [
-			[
-				[{
-						"type": "iPhone",
-						"number": "0123-4567-8888"
-					},
-					{
-						"type": "home",
-						"number": "0123-4567-8910"
-					}
-				]
-			]
-		]
-	}
+	in := `[
+ { "car": {
+    "color": "blue",
+    "price": "$20,000"
+  }
+  },
+ { "car": {
+    "color": "white",
+    "price": "$120,000"
+  }
+  }
+]`
 
-}`
-	m := map[string]interface{}{}
+	var m interface{}
 
 	json.Unmarshal([]byte(in), &m)
 
@@ -48,40 +34,25 @@ func TestGetJsonAtPath(t *testing.T) {
 }
 
 func TestJsonPath_MapJsonAtPathValue(t *testing.T) {
-	j, _ := CompileNewJsonPath([]string{"phoneNumbers.fika.[1].[1].[*].number", "firstName"})
+	j, _ := CompileNewJsonPath([]string{"[1].car.color"})
 
-	in := `{
-	"firstName": "John",
-	"lastName": "doe",
-	"age": 26,
-	"address": {
-		"streetAddress": "naist street",
-		"city": "Nara",
-		"postalCode": "630-0192"
-	},
-	"phoneNumbers": {
-		"fika": [
-			[
-				[{
-						"type": "iPhone",
-						"number": "0123-4567-8888"
-					},
-					{
-						"type": "home",
-						"number": "0123-4567-8910"
-					}
-				]
-			]
-		]
-	}
-
-}`
-	m := map[string]interface{}{}
+	in := `[
+ { "car": {
+    "color": "blue",
+    "price": "$20,000"
+  }
+  },
+ { "car": {
+    "color": "white",
+    "price": "$120,000"
+  }
+  }
+]`
+	var m interface{}
 
 	json.Unmarshal([]byte(in), &m)
 
 	out, err := j.MapJsonAtPathValue(m, func(in interface{}) interface{} {
-		fmt.Println(in)
 		return "hello"
 	})
 

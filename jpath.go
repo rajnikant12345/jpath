@@ -3,6 +3,7 @@ package jpath
 import (
 	"encoding/json"
 	"github.com/rajnikant12345/jpath.git/vcopy"
+	"fmt"
 )
 
 // JsonPath structure representing a JsonPath
@@ -39,6 +40,8 @@ func CompileNewJsonPath(paths []string) (*JsonPath, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println(path)
 
 	return &j, nil
 
@@ -101,12 +104,11 @@ func (e *JsonPath) getJsonAtPath(data interface{}, tokens map[string]interface{}
 					return nil, PathError(ConfigError, "Invalid configuration key "+k)
 				}
 				return e.getJsonAtPath(val, tok)
-				if err != nil {
-					return
-				}
 			} else if v == "" && isstring(val) {
 				return in[k], nil
 			} else if v == "" && isfloat(val) {
+				return in[k], nil
+			} else if v == "" && ismap(val) {
 				return in[k], nil
 			}
 		} else if isslice(data) {
