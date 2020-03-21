@@ -10,9 +10,8 @@ DPG as a product needs to function as a **Bump On The Wire**, or reverse proxy i
 * Tokenize based on content type.
 * Send a request to upstream server and return a response.
 
-We can write a separate blog on DPG but, this is about how we solved the JSON modification problem.
-
- Let's start by taking a JSON request as an example, and we want to modify all  type inside phoneNumbers.
+We can write a separate blog on DPG but, this is about how we solved the JSON modification problem. Let's start by taking a JSON request as an example, and we want to modify all  type inside phoneNumbers.
+```JSON
 {
 	"firstName": "John",
 	"lastName": "doe",
@@ -37,6 +36,7 @@ We can write a separate blog on DPG but, this is about how we solved the JSON mo
 			]
 	}
 }
+```
 
 So, the two problems are as follows:
 How to access type inside the phoneNumbers object.
