@@ -47,9 +47,9 @@ The open-source library given in the link is developed by me to solve the mentio
 
 ### Part1 ( Access JSON objects) 
 
-To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, **phoneNumbers.fika.[\*].[\*].type** is the JSON path to access all type values in phoneNumbers object.  
-Parsing the JSON path is a big deal of problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang Viper ( https://github.com/spf13/viper ), to parse JSON path.
- It is not fully compatible with JSON Path Syntax but, it does the minimum job to parse it. Viper is not case sensitive, so I took its code, modified it and, used it as JSON Path parser. Viper gave me a map of maps as output, which helped me to look deep inside JSON objects. So, now I can access a JSON tag at any level and modify its value as needed. So, for phoneNumbers.fika.[*].[*].type, the map entry will look like,
+To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, **phoneNumbers.fika.[\*].[\*].type** is the JSON path to access all **type** values in **phoneNumbers** object. Parsing the JSON path is a big deal of the problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang  Viper [ https://github.com/spf13/viper](https://github.com/spf13/viper), to parse JSON path.
+
+It is not fully compatible with JSON Path Syntax but, it does the minimum job to parse it. Viper is not case sensitive, so I took its code, modified it and, used it as JSON Path parser. Viper gave me a map of maps as output, which helped me to look deep inside JSON objects. So, now I can access a JSON tag at any level and modify its value as needed. So, for **phoneNumbers.fika.[\*].[\*].type**, the map entry will look like,
 
 ```
 map[phoneNumber]:{map[fika]:{ map[*]:{map[*]:{map[type]:{}} }   }}
@@ -69,6 +69,7 @@ The best part is Golang JSON Parser decode JSON request and save it in to map of
 Given below is an example code for using the library. 
 package main
 
+```GO
 import "github.com/rajnikant12345/jpath.git"
 import "encoding/json"
 import "fmt"
@@ -117,14 +118,13 @@ func main() {
 	    fmt.Println(out)
 	}
 }
+```
 
 
+## Conclusion
 
-
-
-Conclusion
 The code is working fine, but there are still some things to do:
-Remove Viper and add code to parse complete JSON Path Syntax.
-We can be more efficient while parsing JSON.
+* Remove Viper and add code to parse complete JSON Path Syntax.
+* We can be more efficient while parsing JSON.
 
-Thanks for reading and happy coding.
+Thanks for reading and happy coding. 
