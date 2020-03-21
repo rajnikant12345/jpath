@@ -136,7 +136,7 @@ The code is working fine, but there are still some things to do:
 
 * [https://github.com/rajnikant12345/jpath](https://github.com/rajnikant12345/jpath) 
 * [https://github.com/spf13/viper](https://github.com/spf13/viper)
-* [Documentation](https://godoc.org/github.com/rajnikant12345/jpath) [https://godoc.org/github.com/rajnikant12345/jpath]
+* [Documentation](https://godoc.org/github.com/rajnikant12345/jpath) [https://godoc.org/github.com/rajnikant12345/jpath]https://godoc.org/github.com/rajnikant12345/jpath
 
 
 
