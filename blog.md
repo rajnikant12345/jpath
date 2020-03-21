@@ -43,6 +43,8 @@ Modify each value of the selected tag i.e. type
 
 ## Solution	[https://github.com/rajnikant12345/jpath]( https://github.com/rajnikant12345/jpath ) 
 
+Click for Documentation(https://godoc.org/github.com/rajnikant12345/jpath) [https://godoc.org/github.com/rajnikant12345/jpath](https://godoc.org/github.com/rajnikant12345/jpath)
+
 The open-source library given in the link is developed by me to solve the mentioned problem. I will be explaining in detail how it works and solves the problem.
 
 ### Part1 ( Access JSON objects) 
@@ -59,17 +61,19 @@ each key in map key corresponds to a level of JSON object. So, phoneNumbers at
 
 ### Part2 ( Modify JSON Data ) 
 
-The second part of the problem was easy to solve but, to implement one need to know, Depth First Search and Golang reflection. I parsed the data using standard Golang JSON parser, and it converted my JSON data to a map of interfaces, e.g.
+The second part of the problem was easy to solve but, to implement one need to know, **Depth First Search** and **Golang reflection**. I parsed the data using standard Golang JSON parser, and it converted my JSON data to a map of interfaces, e.g.
 
 ```
 map[phoneNumber]:{map[fika]:[ [ map[type]:"iphone",map[number]:"0123-4567-8888" ],[  map[home]:"iphone",map[number]:"0123-4567-1234" ]   ]  }}
 ```
-  So, the logic is simple, explore the depth of your JSON Path and check your JSON at the same level. To modify the JSON value, you have to register a callback. 
+So, the logic is simple, explore the depth of your JSON Path and check your JSON at the same level. To modify the JSON value, you have to register a callback. 
   
 ### Given below is an example code for using the library. 
 
 ```GO
 package main
+
+
 import "github.com/rajnikant12345/jpath.git"
 import "encoding/json"
 import "fmt"
@@ -108,6 +112,7 @@ func main() {
 	json.Unmarshal( []byte(in), &m )
 
 	out,err := j.MapJsonAtPathValue( m, func(in interface{}) interface{} {
+		// this is where we modify json object, in our callback
 		fmt.Println(in)
 		return "hello"
 	} )
@@ -127,4 +132,14 @@ The code is working fine, but there are still some things to do:
 * Remove Viper and add code to parse complete JSON Path Syntax.
 * We can be more efficient while parsing JSON.
 
-Thanks for reading and happy coding. 
+## Refrences and Links
+
+* [https://github.com/rajnikant12345/jpath](https://github.com/rajnikant12345/jpath) 
+* [https://github.com/spf13/viper](https://github.com/spf13/viper)
+* Documentation(https://godoc.org/github.com/rajnikant12345/jpath) [https://godoc.org/github.com/rajnikant12345/jpath]
+
+
+
+# Thanks for reading and happy coding. 
+
+
