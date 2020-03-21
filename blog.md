@@ -22,7 +22,7 @@ We can write a separate blog on DPG but, this is about how we solved the JSON mo
 		"postalCode": "630-0192"
 	},
 	"phoneNumbers": {
-		"fika": [
+		"fika":[
 				[{
 						"type": "iPhone",
 						"number": "0123-4567-8888"
