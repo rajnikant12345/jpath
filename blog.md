@@ -47,12 +47,13 @@ The open-source library given in the link is developed by me to solve the mentio
 
 ### Part1 ( Access JSON objects) 
 
-To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, phoneNumbers.fika.[*].[*].type is the JSON path to access all type values in phoneNumbers object.  
+To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, **phoneNumbers.fika.[\*].[\*].type** is the JSON path to access all type values in phoneNumbers object.  
 Parsing the JSON path is a big deal of problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang Viper ( https://github.com/spf13/viper ), to parse JSON path.
  It is not fully compatible with JSON Path Syntax but, it does the minimum job to parse it. Viper is not case sensitive, so I took its code, modified it and, used it as JSON Path parser. Viper gave me a map of maps as output, which helped me to look deep inside JSON objects. So, now I can access a JSON tag at any level and modify its value as needed. So, for phoneNumbers.fika.[*].[*].type, the map entry will look like,
 
+```
 map[phoneNumber]:{map[fika]:{ map[*]:{map[*]:{map[type]:{}} }   }}
-
+```
 each key in map key corresponds to a level of JSON object. So, phoneNumbers at
  level 0, * at level 1, another star at level 2 and finally the object type . Now we have put this JSON path into a structure and now it's time to do the job modifying it inside a JSON data.
 
