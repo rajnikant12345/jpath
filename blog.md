@@ -61,9 +61,10 @@ each key in map key corresponds to a level of JSON object. So, phoneNumbers at
 
 The second part of the problem was easy to solve but, to implement one need to know, Depth First Search and Golang reflection. I parsed the data using standard Golang JSON parser, and it converted my JSON data to a map of interfaces, e.g.
 
+```
 map[phoneNumber]:{map[fika]:[ [ map[type]:"iphone",map[number]:"0123-4567-8888" ],[  map[home]:"iphone",map[number]:"0123-4567-1234" ]   ]  }}
-  
-So, the logic is simple, explore the depth of your JSON Path and check your JSON at the same level. To modify the JSON value, you have to register a callback. 
+```
+  So, the logic is simple, explore the depth of your JSON Path and check your JSON at the same level. To modify the JSON value, you have to register a callback. 
 The best part is Golang JSON Parser decode JSON request and save it in to map of interfaces, so we don't need to write our JSON parser.
 
 Given below is an example code for using the library. 
