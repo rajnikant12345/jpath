@@ -1,4 +1,4 @@
-## The JSON Path Library
+# The JSON Path Library
 
 While working on Data Protection Gateway ( DPG ), we got stuck on a problem. The problem was, to tokenize JSON tags. This problem has two subparts.
 
@@ -41,11 +41,11 @@ So, the two problems are as follows:
 How to access type inside the phoneNumbers object.
 Modify each value of the selected tag i.e. type
 
-### Solution ( https://github.com/rajnikant12345/jpath )
+## Solution	[https://github.com/rajnikant12345/jpath]( https://github.com/rajnikant12345/jpath ) 
 
 The open-source library given in the link is developed by me to solve the mentioned problem. I will be explaining in detail how it works and solves the problem.
 
-Part1 ( Access JSON objects) :
+### Part1 ( Access JSON objects) 
 
 To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, phoneNumbers.fika.[*].[*].type is the JSON path to access all type values in phoneNumbers object.  
 Parsing the JSON path is a big deal of problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang Viper ( https://github.com/spf13/viper ), to parse JSON path.
@@ -56,7 +56,8 @@ map[phoneNumber]:{map[fika]:{ map[*]:{map[*]:{map[type]:{}} }   }}
 each key in map key corresponds to a level of JSON object. So, phoneNumbers at
  level 0, * at level 1, another star at level 2 and finally the object type . Now we have put this JSON path into a structure and now it's time to do the job modifying it inside a JSON data.
 
-Part2 ( Modify JSON Data ) :
+### Part2 ( Modify JSON Data ) 
+
 The second part of the problem was easy to solve but, to implement one need to know, Depth First Search and Golang reflection. I parsed the data using standard Golang JSON parser, and it converted my JSON data to a map of interfaces, e.g.
 
 map[phoneNumber]:{map[fika]:[ [ map[type]:"iphone",map[number]:"0123-4567-8888" ],[  map[home]:"iphone",map[number]:"0123-4567-1234" ]   ]  }}
