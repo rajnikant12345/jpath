@@ -1,12 +1,14 @@
+## The JSON Path Library
+
 While working on Data Protection Gateway ( DPG ), we got stuck on a problem. The problem was, to tokenize JSON tags. This problem has two subparts.
 
-To read which token to modify.
-Modify the token.
+* To read which token to modify.
+* Modify the token.
 
-DPG as a product needs to function as a Tap On The Wire, i.e. 
-Read the incoming HTTP request.
-Tokenize based on content type.
-Send a request to upstream and return a response.
+DPG as a product needs to function as a **Bump On The Wire**, or reverse proxy i.e. 
+* Read the incoming HTTP request.
+* Tokenize based on content type.
+* Send a request to upstream server and return a response.
 
 We can write a separate blog on DPG but, this is about how we solved the JSON modification problem.
 
