@@ -43,13 +43,11 @@ Modify each value of the selected tag i.e. type
 
 ## Solution	[https://github.com/rajnikant12345/jpath]( https://github.com/rajnikant12345/jpath ) 
 
-Click for Documentation(https://godoc.org/github.com/rajnikant12345/jpath) [https://godoc.org/github.com/rajnikant12345/jpath](https://godoc.org/github.com/rajnikant12345/jpath)
-
 The open-source library given in the link is developed by me to solve the mentioned problem. I will be explaining in detail how it works and solves the problem.
 
 ### Part1 ( Access JSON objects) 
 
-To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, **phoneNumbers.fika.[\*].[\*].type** is the JSON path to access all **type** values in **phoneNumbers** object. Parsing the JSON path is a big deal of the problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang  Viper [ https://github.com/spf13/viper](https://github.com/spf13/viper), to parse JSON path.
+To access JSON objects, one needs to know JSON Path Syntax. You can refer to https://jsonpath.com/ for testing it. In my example JSON request, **phoneNumbers.fika.[\*].[\*].type** is the JSON path to access all **type** values in **phoneNumbers** object. Parsing the JSON path is a big deal of the problem, I tried my best but, timelines were not in favor of writing a JSON path parser from scratch, so I used Golang  Viper i.e. [ https://github.com/spf13/viper](https://github.com/spf13/viper), to parse JSON path.
 
 It is not fully compatible with JSON Path Syntax but, it does the minimum job to parse it. Viper is not case sensitive, so I took its code, modified it and, used it as JSON Path parser. Viper gave me a map of maps as output, which helped me to look deep inside JSON objects. So, now I can access a JSON tag at any level and modify its value as needed. So, for **phoneNumbers.fika.[\*].[\*].type**, the map entry will look like,
 
