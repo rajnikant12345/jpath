@@ -41,7 +41,7 @@ So, the two problems are as follows:
 How to access type inside the phoneNumbers object.
 Modify each value of the selected tag i.e. type
 
-Solution (https://github.com/rajnikant12345/jpath)
+### Solution ( https://github.com/rajnikant12345/jpath )
 
 The open-source library given in the link is developed by me to solve the mentioned problem. I will be explaining in detail how it works and solves the problem.
 
